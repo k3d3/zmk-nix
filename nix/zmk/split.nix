@@ -18,6 +18,7 @@ in runCommand name ({
 } // args // (lib.genAttrs parts (part:
   buildKeyboard ((lib.attrsets.removeAttrs args [ "shield" "parts" ]) // {
     name = "${name}-${part}";
+    board = lib.replaceStrings [ "%PART%" ] [ part ] board;
     shield = lib.replaceStrings [ "%PART%" ] [ part ] shield;
     westDeps = args.westDeps or westDeps;
   })
