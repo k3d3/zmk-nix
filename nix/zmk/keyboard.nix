@@ -4,7 +4,7 @@
 }:
 
 { board
-, shield
+, shield ? ""
 , src
 , zephyrDepsHash
 , name ? "zmk"
@@ -20,6 +20,6 @@
     "-b" board
     "--"
     "-DZMK_CONFIG=/build/${src.name or "source"}/${config}"
-    "-DSHIELD=${shield}"
+    (if shield == "" then "" else "-DSHIELD=${shield}")
   ] ++ extraCmakeFlags;
 })
